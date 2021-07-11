@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
    <PropertyGroup>
-      <TargetFrameworks>netcoreapp2.1;net46</TargetFrameworks>
+      <TargetFrameworks>net5.0;net6.0;netcoreapp2.1;net472</TargetFrameworks>
    </PropertyGroup>
 
   <PropertyGroup>
-    <MicrosoftConfigurationVersion Condition=" '$(TargetFramework)' == 'net46' ">1.1.2</MicrosoftConfigurationVersion>
-    <MicrosoftConfigurationVersion Condition=" '$(TargetFramework)' != 'net46' ">2.2.0</MicrosoftConfigurationVersion>
+    <MicrosoftConfigurationVersion Condition=" '$(TargetFramework)' == 'net472' ">1.1.2</MicrosoftConfigurationVersion>
+    <MicrosoftConfigurationVersion Condition=" '$(TargetFramework)' != 'net472' ">2.2.0</MicrosoftConfigurationVersion>
   </PropertyGroup>
 
    <ItemGroup>

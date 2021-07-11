@@ -222,22 +222,22 @@ namespace NuGetUtils.Lib.Exec
          if ( entryPointMethodName.IsNullOrEmpty() )
          {
             var props =
-#if NET46 || NETSTANDARD1_6 || NETSTANDARD2_0
+#if NET472 || NETSTANDARD1_6 || NETSTANDARD2_0
                new HashSet<MethodInfo>(
 #endif
                type.DeclaredProperties.SelectMany( GetPropertyMethods ).Where( m => m != null )
-#if NET46 || NETSTANDARD1_6 || NETSTANDARD2_0
+#if NET472 || NETSTANDARD1_6 || NETSTANDARD2_0
                )
 #else
                .ToHashSet()
 #endif
                ;
             var evts =
-#if NET46 || NETSTANDARD1_6 || NETSTANDARD2_0
+#if NET472 || NETSTANDARD1_6 || NETSTANDARD2_0
                new HashSet<MethodInfo>(
 #endif
                type.DeclaredEvents.SelectMany( GetEventMethods ).Where( m => m != null )
-#if NET46 || NETSTANDARD1_6 || NETSTANDARD2_0
+#if NET472 || NETSTANDARD1_6 || NETSTANDARD2_0
                )
 #else
                .ToHashSet()
@@ -325,7 +325,7 @@ namespace NuGetUtils.Lib.Exec
 public static partial class E_NuGetUtils
 {
 
-#if NET46
+#if NET472
    /// <summary>
    /// This method invokes <see cref="ExecuteMethodWithinNuGetAssemblyAsync"/> and saves the return value to file, if so configured.
    /// </summary>
@@ -360,7 +360,7 @@ public static partial class E_NuGetUtils
       CancellationToken token,
       BoundRestoreCommandUser restorer,
       Func<Type, Object> additionalParameterTypeProvider,
-#if NET46
+#if NET472
       AppDomainSetup appDomainSetup
 #else
       String sdkPackageID,
@@ -374,7 +374,7 @@ public static partial class E_NuGetUtils
          restorer,
          additionalParameterTypeProvider,
 
-#if NET46
+#if NET472
          appDomainSetup
 #else
          await configuration.RestoreIfNeeded( token, restorer, sdkPackageID, sdkPackageVersion )
@@ -402,7 +402,7 @@ public static partial class E_NuGetUtils
       return maybeResult;
    }
 
-#if NET46
+#if NET472
    /// <summary>
    /// Using information from this <see cref="NuGetExecutionConfiguration"/>, restores the NuGet package, finds an assembly, and executes a method within the assembly.
    /// If the method returns <see cref="ValueTask{TResult}"/> (also non-generic variant for .NET Core 2.1), <see cref="Task"/> or <see cref="Task{TResult}"/>, it is <c>await</c>ed upon.
@@ -438,7 +438,7 @@ public static partial class E_NuGetUtils
       CancellationToken token,
       BoundRestoreCommandUser restorer,
       Func<Type, Object> additionalParameterTypeProvider,
-#if NET46
+#if NET472
       AppDomainSetup appDomainSetup
 #else
       EitherOr<IEnumerable<String>, LockFile> thisFrameworkRestoreResult = default
@@ -452,7 +452,7 @@ public static partial class E_NuGetUtils
          async ( assemblyLoader, assembly, suitableMethod ) => suitableMethod.Value == null ?
             new EitherOr<Object, NoExecutableMethodFound>( NoExecutableMethodFound.Instance ) :
             new EitherOr<Object, NoExecutableMethodFound>( await assemblyLoader.ExecuteSpecificMethod( suitableMethod.Value, token, additionalParameterTypeProvider ) ),
-#if NET46
+#if NET472
             appDomainSetup
 #else
             thisFrameworkRestoreResult
@@ -461,7 +461,7 @@ public static partial class E_NuGetUtils
             );
    }
 
-#if NET46
+#if NET472
    /// <summary>
    /// Using information from this <see cref="NuGetExecutionConfiguration"/>, restores the NuGet package, finds an assembly, and finds a suitable method within the assembly to execute.
    /// </summary>
@@ -498,7 +498,7 @@ public static partial class E_NuGetUtils
       CancellationToken token,
       BoundRestoreCommandUser restorer,
       Func<NuGetAssemblyResolver, Assembly, Lazy<MethodInfo>, Task<TResult>> useMethod,
-#if NET46
+#if NET472
       AppDomainSetup appDomainSetup
 #else
       String sdkPackageID,
@@ -515,7 +515,7 @@ public static partial class E_NuGetUtils
             token,
             restorer,
             useMethod,
-#if NET46
+#if NET472
             appDomainSetup
 #else
             await configuration.RestoreIfNeeded( token, restorer, sdkPackageID, sdkPackageVersion )
@@ -546,7 +546,7 @@ public static partial class E_NuGetUtils
       CancellationToken token,
       BoundRestoreCommandUser restorer,
       Func<NuGetAssemblyResolver, Assembly, Lazy<MethodInfo>, Task<TResult>> useMethod,
-#if NET46
+#if NET472
       AppDomainSetup appDomainSetup
 #else
       EitherOr<IEnumerable<String>, LockFile> thisFrameworkRestoreResult = default
@@ -558,7 +558,7 @@ public static partial class E_NuGetUtils
       ArgumentValidator.ValidateNotNull( nameof( restorer ), restorer );
       using ( var assemblyLoader = NuGetAssemblyResolverFactory.NewNuGetAssemblyResolver(
          restorer,
-#if NET46
+#if NET472
          appDomainSetup,
          out var appDomain
 #else
@@ -568,7 +568,7 @@ public static partial class E_NuGetUtils
 #endif
          , defaultGetFiles: getFiles
          ) )
-#if NET46
+#if NET472
       using ( new UsingHelper( () => { if ( appDomain != null ) { try { AppDomain.Unload( appDomain ); } catch { } } } ) )
 #endif
       {

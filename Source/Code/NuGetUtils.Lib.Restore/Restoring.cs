@@ -213,7 +213,7 @@ namespace NuGetUtils.Lib.Restore
             this.DiskCacheDirectory = lockFileCacheDir
                .OrIfNullOrEmpty( String.IsNullOrEmpty( lockFileCacheEnvironmentVariableName ) ? null : Environment.GetEnvironmentVariable( lockFileCacheEnvironmentVariableName ) )
                .OrIfNullOrEmpty( ( getDefaultLockFileCacheDir ?? GetDefaultLockFileDir )( Environment.GetEnvironmentVariable(
-#if NET46
+#if NET472
                   Environment.OSVersion.Platform == PlatformID.Win32NT || Environment.OSVersion.Platform == PlatformID.Win32S || Environment.OSVersion.Platform == PlatformID.Win32Windows || Environment.OSVersion.Platform == PlatformID.WinCE
 #else
                   System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform( System.Runtime.InteropServices.OSPlatform.Windows )
@@ -427,7 +427,7 @@ namespace NuGetUtils.Lib.Restore
                   {
                      var hasFloating = g.Any( p => String.IsNullOrEmpty( p.PackageVersion ) );
                      return hasFloating ?
-                        VersionRange.AllFloating :
+                        VersionRange.AllStableFloating :
                         g
                            .Where( p => !String.IsNullOrEmpty( p.PackageVersion ) )
                            .Select( p => VersionRange.Parse( p.PackageVersion ) )

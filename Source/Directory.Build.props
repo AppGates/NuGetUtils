@@ -15,7 +15,7 @@
   </PropertyGroup>
   
   <PropertyGroup>
-    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+    <!--<TreatWarningsAsErrors>True</TreatWarningsAsErrors>-->
     <TreatSpecificWarningsAsErrors />
     <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
     <LangVersion>latest</LangVersion>
@@ -29,6 +29,6 @@
   </PropertyGroup>
   
   <PropertyGroup>
-    <NuGetTargetVersion>4.9.4</NuGetTargetVersion>
+    <NuGetTargetVersion>*</NuGetTargetVersion>
   </PropertyGroup>
 </Project>

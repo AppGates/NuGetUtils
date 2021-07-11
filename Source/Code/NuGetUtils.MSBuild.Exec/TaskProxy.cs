@@ -28,8 +28,8 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using UtilPack;
 using TaskItem = Microsoft.Build.Utilities.TaskItem;
+using ArgumentValidator = UtilPack.ArgumentValidator;
 
 namespace NuGetUtils.MSBuild.Exec
 {
@@ -251,7 +251,7 @@ public static partial class E_NuGetUtils
    internal static Object GetOutputPropertyValue( this TaskProxy.TaskPropertyHolder propertyHolder, JToken token )
    {
       return propertyHolder.IsTaskItemArray ?
-         (Object) ( ( token as JArray )?.Select( j => j.GetTaskItemFromJToken() )?.Where( t => t != null )?.ToArray() ?? Empty<ITaskItem>.Array ) :
+         (Object) ( ( token as JArray )?.Select( j => j.GetTaskItemFromJToken() )?.Where( t => t != null )?.ToArray() ?? UtilPack.Empty<ITaskItem>.Array ) :
          ( token as JValue )?.Value?.ToString();
    }
 

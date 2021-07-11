@@ -48,7 +48,7 @@ namespace NuGetUtils.MSBuild.Exec
 
          var ab = AssemblyBuilder.DefineDynamicAssembly( new AssemblyName( "NuGetTaskWrapperDynamicAssembly" ), AssemblyBuilderAccess.RunAndCollect );
          var mb = ab.DefineDynamicModule( "NuGetTaskWrapperDynamicAssembly.dll"
-#if NET46
+#if NET472
                , false
 #endif
                );
@@ -271,7 +271,7 @@ namespace NuGetUtils.MSBuild.Exec
          return new TypeGenerationResult(
             properties.Select( p => (p.p.TypeName, p.Item2) ).ToImmutableArray(),
             tb.
-#if NET46
+#if NET472
             CreateType()
 #else
             CreateTypeInfo().AsType()

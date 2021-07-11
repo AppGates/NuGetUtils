@@ -92,7 +92,7 @@ namespace NuGetUtils.MSBuild.Exec.Inspect
 
                return (Object) null;
             },
-#if NET46
+#if NET472
             null
 #else
             sdkPackageID,

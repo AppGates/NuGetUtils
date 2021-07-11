@@ -457,7 +457,7 @@ namespace NuGetUtils.MSBuild.Exec
          )
       {
          assemblyName = Path.GetFullPath( Path.Combine( this._toolsDirectory, assemblyName ) + "." +
-#if NET46
+#if NET472
             "exe"
 #else
             "dll"
@@ -471,7 +471,7 @@ namespace NuGetUtils.MSBuild.Exec
          }
 
          return
-#if NET46
+#if NET472
             assemblyName
 #else
             "dotnet"

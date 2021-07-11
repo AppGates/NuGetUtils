@@ -168,6 +168,7 @@ namespace NuGetUtils.MSBuild.Push
                   false,
                   String.IsNullOrEmpty( symbolSource ),
                   noServiceEndPoint,
+                  true,
                   logger
                   );
             }

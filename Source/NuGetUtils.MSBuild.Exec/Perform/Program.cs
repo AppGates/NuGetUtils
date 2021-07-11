@@ -76,7 +76,7 @@ namespace NuGetUtils.MSBuild.Exec.Perform
                      JsonConvert.DeserializeObject( config.InputProperties, type )
                      ;
                },
-#if NET46
+#if NET472
                null
 #else
                sdkPackageID,

@@ -32,9 +32,11 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using UtilPack;
 using UtilPack.Documentation;
 using UtilPack.JSON.Configuration;
+using UsingHelper = UtilPack.UsingHelper;
+using ArgumentValidator = UtilPack.ArgumentValidator;
+using UtilPack;
 
 namespace NuGetUtils.Lib.Tool
 {
@@ -640,14 +642,14 @@ public static partial class E_NuGetUtils
       return
          $"{execName} version {versionSource.Assembly.GetName().Version} (NuGet version {typeof( NuGet.Common.ILogger ).Assembly.GetName().Version})\n" +
          generator.GenerateParametersDocumentation(
-            ( cmdLineInfo.AdditionalGroups ?? Empty<ParameterGroupOrFixedParameter>.Enumerable ).Prepend( new NamedParameterGroup( false, cmdLineName ) ),
+            Enumerable.Prepend((cmdLineInfo.AdditionalGroups ?? UtilPack.Empty<ParameterGroupOrFixedParameter>.Enumerable), new NamedParameterGroup( false, cmdLineName ) ),
             commandLineConfigType,
             execName,
             ArgumentValidator.ValidateNotEmpty( nameof( cmdLineInfo.Purpose ), cmdLineInfo.Purpose ),
             cmdLineName
             )
             + "\n\n\n" +
-         generator.GenerateParametersDocumentation( ( configInfo.AdditionalGroups ?? Empty<ParameterGroupOrFixedParameter>.Enumerable ).Prepend( new NamedParameterGroup( false, configName ) ),
+         generator.GenerateParametersDocumentation( Enumerable.Prepend(configInfo.AdditionalGroups ?? UtilPack.Empty<ParameterGroupOrFixedParameter>.Enumerable, new NamedParameterGroup( false, configName ) ),
             configConfigType,
             execName,
             ArgumentValidator.ValidateNotEmpty( nameof( configInfo.Purpose ), configInfo.Purpose ),
